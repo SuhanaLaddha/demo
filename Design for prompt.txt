@@ -1,0 +1,111 @@
+My name is Kunika Prajapat
+I am Student of MCA, Computer Science and Application
+College name: Vivekananda Global University
+School: Tagore Public School, Jaipur
+Gmail: kunikaprajapat1026@gmail.com
+Contact number: 8003535828
+GitHub: https://github.com/Kunika1234/Kunika-Prajapat-
+Instagram: kunika_prajapat_0726
+linkedin: www.linkedin.com/in/kunika-prajapat-486a06311
+scored 70% in 10th boards cbse
+scored 70% in 12th boards cbse 
+scored 74% in BCA (Batchlor's Of Computer Science and Application) 
+Include all this info in my about me section
+
+the hero page :
+also make a navigation bar at the top where you will include all the sections like about me , certifications , projects , skills, mini projects etc.: and generate a soothing effect in that particular navigation bar , and just highlight the certifications and project thing with some different color or add a logo before it in a circular icon or any creative way  
+i am also providing my resume , so please make a button in top right side in the navigation bar , so that from there anyone can download it from here
+i want a dark neon , and light color theme based : include the colors like :#f89bf1 , #d5e9ea 
+the hero page should include image in a circular icon having a neon color border with a shadow after it so it looks like 3d , include colors like : #b3cfd8 ,#fedeacb , these two color circles will highlight it as on boundary and use a lighter color to shadow it or use something creative way to shadow it to look 3d , and the the image of me should be on the right side , 
+and my Name and what i am pursuing right now just these two things should be mentioned in the left side as in two different lines 
+name should be blinking with a mixture of neon colors , and #d29c8a #d5e9ea etc
+the next line should be written according to the theme , and manage it accordingly how would it look
+cursor : whenever we move the cursor the effect that should be show: 
+all content should be in one webpage only , like on scrolling the webpage we will go to different sections that we added on navigation bar 
+
+
+about us :
+the heading will be including the effect texture hover reveal , originally white , and on hover a color which match the theme
+add all the details which has been mentioned about me , also give me a section at the footer where we i will include the hobbier , which will added as name of the hobbies and logo or emoji in front of that and in a line having gaps between 
+hobbies are: Dancing , Cooking  
+
+
+Certifications: 
+the heading will be including the effect texture hover reveal , originally white , and on hover a color which match the theme  
+in the upper side heading should be highlighted 
+certificates should be arranged as three in a row , every certificate should be separated by a minute distance and should be bordered by light color
+*Cloud Computing Abstract (BICON 2021)
+*BICON 2022, 2023 participation
+*Honeywell Cloud Program (2024)
+*Microsoft Python + Excel certifications
+*Edureka Data Science Workshop
+*IP Awareness Program (2022)
+
+Technical Skills:
+the heading will be including the effect texture hover reveal , originally white , and on hover a color which match the theme
+all the skill should be showed in circular icons and when we hover on it , it should have a bounce and get bigger size effect kind of 
+these circular icons would be having a neon color boundary followed by faded grey color , to give a 3d effect 
+skills are : Python, Linux, c, c++, javascript , SQL, Devops , HTML/CSS, Microsoft Office  
+
+Skills:
+Communication, Teamwork, Leadership, Problem Solving, Quick Learner
+
+Projects :
+the heading will be including the effect texture hover reveal , originally white , and on hover a color which match the theme
+the projects should be showcase as a two in a row , the page will be half divided 
+every project will be 
+project 1 : 🚀 DevOps Project 1 - Automated CI/CD Pipeline in Action!
+Excited to share my first hands-on DevOps project where I built a fully automated CI/CD pipeline using:
+Git Bash for local development
+GitHub for version control
+Jenkins for continuous integration and automation
+What I Built:
+Set up a Jenkins job with a 1-minute polling trigger
+Created and pushed basic & test files from Git Bash to GitHub
+Jenkins automatically:
+Builds a new Docker image
+Deletes the old container
+Launches a new container
+Pushes the updated image to Docker Hub
+All of this happens without manually opening Docker terminal or VM — end-to-end automation achieved!
+This project gave me a clear understanding of CI/CD principles, job configuration, Git–Jenkins integration, and Docker automation.
+Grateful for the continuous learning experience! 
+
+project 2: give it a creative name please
+Docker menu based project ,running through streamlit , all commands of containers or docker are eunning thorugh streamlit just by connecting the ip address and providing the password
+according to this generate the content of this, write its contents and skills accordingly
+
+project 3: Travel Itenary Generator  
+this project is made by gradio in jupyter using python , write its contents and skills accordingly
+
+project 4: Linux commands on Streamlit Dashboard 
+all the Linux commands running on streamlit dash board 
+
+project 5: Multi Projects dashboard
+i made it on streamlit  
+in this dashboard different tabs are created on which projects according to a particular domain are showcasing , example Linux, python , docker bases, js dashboards 
+write content accordingly 
+
+
+Contact me : 
+make two box in which sections will be divide and , the icons will be allocated in it , like of insta , Email , Mobile no., Github id, linkedin etc , the link to contact particularly will be in the icons, only 
+on hovering just do the icon slightly bigger and highlight it 
+
+Mini projects :
+Send an Email: Use Python to successfully send an email.  
+Send an SMS: Send a text message using Python.  
+Make a Phone Call: Use Python to make a phone call.   
+Send a WhatsApp Message: Use Python to send a WhatsApp message
+Post on Instagram: Post a message on Instagram using Python.  
+Write a blog post on companies using Linux: Explain why they are using it and what benefits they are getting.
+Change the logo or icon of any program in Linux: Learn how to modify icons or logos for Linux applications.
+Send an email, WhatsApp message, tweet, and SMS through the Linux terminal: Use command-line tools for these tasks.
+Run any tool or technology in Docker: Experiment with running software inside a Docker container.
+
+generate a short name for it , and brief intro for it as well 
+now make small button type oval shapes of it in this page and on hover on every shape it will describe a brief info about it 
+ 
+
+for all:
+all content should be showcased when we scroll , show one by one 
+the all headings of pages should have different colors please according to the theme on hovering

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Send Email</title>
+  <!-- EmailJS script -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("Mr3q_fySilH0V2PqC"); // Replace with your actual Public Key
+    })();
+  </script>
+</head>
+<body>
+
+  <h2>Send an Email</h2>
+
+  <form id="emailForm">
+    <input type="text" name="to_name" placeholder="Receiver's Name" required><br><br>
+    <input type="email" name="to_email" placeholder="Receiver's Email" required><br><br>
+    <textarea name="message" placeholder="Your message" required></textarea><br><br>
+    <button type="submit">Send Email</button>
+  </form>
+
+  <script>
+    document.getElementById('emailForm').addEventListener('submit', function(e) {
+      e.preventDefault(); 
+
+      emailjs.sendForm('service_h9bg6oj', 'template_z4ose5h', this)
+        .then(function() {
+          alert("Email sent successfully!");
+        }, function(error) {
+          alert("Failed to send email: " + JSON.stringify(error));
+        });
+    });
+  </script>
+
+</body>
+</html>

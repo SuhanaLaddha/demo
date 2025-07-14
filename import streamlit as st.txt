@@ -1,0 +1,150 @@
+import streamlit as st
+import paramiko
+import os
+import joblib
+import pandas as pd
+import google.generativeai as genai
+
+# ✅ THIS MUST COME FIRST
+st.set_page_config(page_title="Project Dashboard", layout="wide")
+
+
+# ------------------ Load ML model ------------------
+try:
+    model = joblib.load('my_salary.pkl')
+except:
+    model = None
+
+# ------------------ API KEYS ------------------
+st.sidebar.title("🔐 API Keys")
+
+openai_key = st.sidebar.text_input("OpenAI API Key", type="password")
+gemini_key = st.sidebar.text_input("Gemini API Key", type="password")
+
+if gemini_key:
+    try:
+        import google.generativeai as genai
+        genai.configure(api_key=gemini_key)
+        gemini_model = genai.GenerativeModel('gemini-pro')
+    except Exception as e:
+        gemini_model = None
+        st.sidebar.error(f"Gemini setup error: {e}")
+else:
+    gemini_model = None
+
+
+# ------------------ SSH CONNECT ------------------
+st.sidebar.title("🔐 SSH Remote Login")
+remote_ip = st.sidebar.text_input("Ip address")
+remote_user = st.sidebar.text_input("Username")
+remote_pass = st.sidebar.text_input("Password", type="password")
+
+ssh_client = None
+ssh_status = False
+
+if st.sidebar.button("Connect"):
+    try:
+        ssh_client = paramiko.SSHClient()
+        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_client.connect(remote_ip, username=remote_user, password=remote_pass, timeout=5)
+        ssh_status = True
+        st.sidebar.success("Connected Successfully 🎉")
+    except Exception as e:
+        st.sidebar.error(f"Connection Failed ❌\n{e}")
+        ssh_client = None
+        ssh_status = False
+
+# ------------------ Dashboard Tabs ------------------
+st.title("📊 Multi-Project Dashboard")
+tabs = st.tabs(["🖥️ Linux Commands", "🐳 Docker Manager", "🧠 AI Psychiatrist", " Salary Predictor"])
+
+# ------------------ TAB 1: Linux Commands ------------------
+with tabs[0]:
+    st.header("🖥️ Run Linux Commands on Remote Server")
+
+    if ssh_client:
+        linux_command = st.selectbox("Choose command", [
+            "date", "cal", "uptime", "whoami", "hostname", "df -h", "free -m", "uname -a",
+            "id", "top -n 1 -b", "ps aux", "ls -l", "pwd", "who", "users", "netstat -tulpn",
+            "ip a", "ip r", "ping -c 2 google.com", "cat /etc/os-release", "lsblk", "uptime", "last"
+        ])
+        if st.button("Execute Command"):
+            stdin, stdout, stderr = ssh_client.exec_command(linux_command)
+            output = stdout.read().decode()
+            st.code(output)
+    else:
+        st.warning("❗ Please connect to the server from the sidebar.")
+
+# ------------------ TAB 2: Docker Manager ------------------
+with tabs[1]:
+    st.header("🐳 Docker Operations via SSH")
+
+    if ssh_client:
+        docker_option = st.selectbox("Docker Command", [
+            "Show Containers", "Launch Container", "Stop Container", "Remove Container",
+            "Show Images", "Pull Image", "Remove Image"
+        ])
+
+        if docker_option == "Launch Container":
+            image = st.text_input("Image name (e.g. ubuntu)")
+            name = st.text_input("Container name")
+            if st.button("Launch"):
+                cmd = f"docker run -dit --name {name} {image}"
+                ssh_client.exec_command(cmd)
+                st.success("Container launched.")
+
+        elif docker_option == "Stop Container":
+            name = st.text_input("Container name to stop")
+            if st.button("Stop"):
+                ssh_client.exec_command(f"docker stop {name}")
+                st.success("Container stopped.")
+
+        elif docker_option == "Remove Container":
+            name = st.text_input("Container name to remove")
+            if st.button("Remove"):
+                ssh_client.exec_command(f"docker rm {name}")
+                st.success("Container removed.")
+
+        elif docker_option == "Pull Image":
+            image = st.text_input("Image name to pull")
+            if st.button("Pull"):
+                ssh_client.exec_command(f"docker pull {image}")
+                st.success("Image pulled.")
+
+        elif docker_option == "Remove Image":
+            image = st.text_input("Image name to remove")
+            if st.button("Remove"):
+                ssh_client.exec_command(f"docker rmi {image}")
+                st.success("Image removed.")
+
+        else:
+            if st.button("Show"):
+                cmd = "docker ps -a" if docker_option == "Show Containers" else "docker images"
+                _, stdout, _ = ssh_client.exec_command(cmd)
+                st.code(stdout.read().decode())
+    else:
+        st.warning("❗ Please connect to the server from the sidebar.")
+
+# ------------------ TAB 3: AI Psychiatrist ------------------
+with tabs[2]:
+    st.header("🧠 MindMate - AI Mental Health Companion")
+
+    user_input = st.text_area("🗣️ What's on your mind today?", height=100)
+    if st.button("Chat with AI"):
+        if gemini_model:
+            response = gemini_model.generate_content(user_input)
+            st.markdown("### 🤖 MindMat Says:")
+            st.write(response.text)
+        else:
+            st.warning("Please provide a Gemini API key.")
+
+# ------------------ TAB 4: House Price Prediction ------------------
+with tabs[3]:
+    st.header("Salary Prediction (Linear Regression)")
+    area = st.number_input("Enter Area in sq. ft", min_value=100, max_value=10000, value=1000)
+    if st.button("Predict"):
+        if model:
+            price = model.predict([[area]])
+            st.success(f"Predicted Price: ₹ {int(price[0])}")
+        else:
+            st.error("Model not found. Please train and save 'my_salary.pkl'.")

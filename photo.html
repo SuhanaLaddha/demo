@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>📸 Capture Photo</title>
+    <style>
+        video, img {
+            border: 2px solid #333;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>📸 Click Photo and Preview + Download</h2>
+
+    <video id="video" width="320" height="240" autoplay></video><br>
+    <button onclick="startCamera()">📷 Start Camera</button>
+    <button onclick="capture()">📸 Capture</button><br>
+
+    <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+
+    <h4>🖼️ Captured Image:</h4>
+    <img id="photo" width="320" style="display:none;"><br>
+
+    <a id="download" href="#" download="photo.png" style="display:none;">⬇️ Download Photo</a>
+
+    <script>
+    let stream = null;
+
+    function startCamera() {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(s => {
+                stream = s;
+                document.getElementById("video").srcObject = stream;
+            })
+            .catch(err => {
+                alert("Camera access denied or not supported.");
+                console.error(err);
+            });
+    }
+
+    function capture() {
+        if (!stream) {
+            alert("Please start the camera first.");
+            return;
+        }
+        const canvas = document.getElementById('canvas');
+        const video = document.getElementById('video');
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+        const image = canvas.toDataURL("image/png");
+        const link = document.getElementById('download');
+        link.href = image;
+        link.download = "photo.png";
+        link.innerText = "📄 Download Photo";
+        link.style.display = "inline";
+        document.getElementById("photo").src = image;
+        document.getElementById("photo").style.display = "block";
+    }
+   </script>
+</body>
+</html>
